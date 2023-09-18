@@ -1,9 +1,9 @@
 import { experimental_createTRPCNextAppDirServer as createTRPCNextAppDirServer } from '@trpc/next/app-dir/server'
-import { experimental_nextHttpLink as nextHttpLink } from '@trpc/next/app-dir/links/nextHttp'
+import { experimental_nextCacheLink as nextCacheLink } from '@trpc/next/app-dir/links/nextCache'
 import SuperJSON from 'superjson'
 import { loggerLink } from '@trpc/client'
-import { getUrl } from '../utils'
-import { AppRouter } from '@/server/api/router'
+import { AppRouter, appRouter } from '@/server/api/router'
+import { createTRPCContext } from '@/server/api/context'
 
 export const api = createTRPCNextAppDirServer<AppRouter>({
   config() {
@@ -12,8 +12,10 @@ export const api = createTRPCNextAppDirServer<AppRouter>({
         loggerLink({
           enabled: (opts) => opts.direction === 'down' && opts.result instanceof Error,
         }),
-        nextHttpLink({
-          url: getUrl('/api/trpc'),
+        nextCacheLink({
+          revalidate: 1,
+          router: appRouter,
+          createContext: createTRPCContext,
         }),
       ],
       transformer: SuperJSON,
