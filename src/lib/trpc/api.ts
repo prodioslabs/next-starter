@@ -6,6 +6,21 @@ import { cookies } from 'next/headers'
 import { AppRouter } from '@/server/api/router'
 import { getUrl } from '../utils'
 
+/**
+ * api can be used in the server components to run query or mutation such as
+ *
+ * ```tsx
+ * const user = await api.user.getCurrentUser.query()
+ * ```
+ *
+ * If you are using `api` in any page with dynamic path, make sure to add correct `dynamic` param
+ * to make the page render dyanmically at request time, el
+ *
+ * ```
+ * const dynamic = 'force-dynamic'
+ * ```
+ */
+
 export const api = createTRPCNextAppDirServer<AppRouter>({
   config() {
     return {
@@ -14,13 +29,12 @@ export const api = createTRPCNextAppDirServer<AppRouter>({
           enabled: (opts) => opts.direction === 'down' && opts.result instanceof Error,
         }),
         nextHttpLink({
+          revalidate: 0,
           url: getUrl('/api/trpc'),
           batch: true,
-          headers() {
-            return {
-              cookie: cookies().toString(),
-              'x-trpc-source': 'rsc-invoke',
-            }
+          headers: {
+            cookie: cookies().toString(),
+            'x-trpc-source': 'rsc-invoke',
           },
         }),
       ],
