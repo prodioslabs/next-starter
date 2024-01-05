@@ -34,7 +34,7 @@ const config = {
   rules: {
     'no-undef': 'off',
     '@typescript-eslint/no-unused-vars': 'error',
-    '@typescript-eslint/no-use-before-define': 'error',
+    '@typescript-eslint/no-use-before-define': 'off',
     camelcase: 'off',
     'comma-dangle': 'off',
     'func-call-spacing': 'off',
