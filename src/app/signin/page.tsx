@@ -23,14 +23,14 @@ export default function SigninPage() {
 
   return (
     <div className="grid h-screen grid-cols-2">
-      <div className="flex flex-col border-r border-muted-foreground/25 bg-muted p-8">
+      <div className="flex flex-col border-r border-primary-foreground/25 bg-primary p-8 text-primary-foreground">
         <div className="flex items-center gap-2">
-          <div className="font-mono text-3xl font-bold">Next Starter</div>
+          <div className="text-4xl font-semibold">Next Starter</div>
         </div>
         <div className="flex-1" />
-        <div className="text-base text-muted-foreground">
-          A sleek Next.js 13 starter kit, integrating Prisma for seamless data handling, TailwindCSS for intuitive
-          styling, and @shadcn/ui for modern UI components
+        <div className="text-base text-primary-foreground">
+          A sleek Next.js starter kit, integrating Prisma for seamless data handling, TailwindCSS for intuitive styling,
+          and @shadcn/ui for modern UI components
         </div>
       </div>
       <div className="flex flex-col items-center justify-center p-8">

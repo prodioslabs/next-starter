@@ -2,7 +2,6 @@
 
 import { useSession } from 'next-auth/react'
 import {
-  BellIcon,
   CalendarIcon,
   FilesIcon,
   FolderIcon,
@@ -19,6 +18,7 @@ import { cn } from '@/lib/utils'
 import Spinner from '@/components/ui/spinner'
 import NavLink from './nav-link'
 import AccountMenu from './account-menu'
+import NotificationsMenu from './nofitications-menu'
 
 const ThemeToggle = dynamic(() => import('./theme-toggle'), {
   ssr: false,
@@ -76,7 +76,7 @@ export default function AppShell({ children, className, style }: AppShellProps) 
           <div className="flex-1" />
           {session.status === 'authenticated' ? (
             <>
-              <BellIcon className="h-4 w-4 text-muted-foreground" />
+              <NotificationsMenu />
               <div className="h-6 border-r" />
               <AccountMenu />
             </>

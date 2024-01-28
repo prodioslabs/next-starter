@@ -25,8 +25,7 @@ export default function SignoutPage() {
         .with({ status: 'unauthenticated' }, () => {
           return (
             <div className="flex flex-col items-center space-y-2">
-              <FlameIcon className="h-10 w-10" />
-              <div className="text-sm font-medium">Login to Next Starter AppF</div>
+              <div className="text-sm font-medium">Login to Next Starter App</div>
               <BaseButton>
                 <Link href="/api/auth/signin">Sign In</Link>
               </BaseButton>

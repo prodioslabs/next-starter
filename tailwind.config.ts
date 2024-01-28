@@ -1,5 +1,6 @@
 import { Config } from 'tailwindcss'
 import animate from 'tailwindcss-animate'
+import defaultTheme from 'tailwindcss/defaultTheme'
 
 export default {
   darkMode: ['class'],
@@ -13,6 +14,10 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['var(--font-geist-sans)', ...defaultTheme.fontFamily.sans],
+        mono: ['var(--font-geist-mono)', ...defaultTheme.fontFamily.mono],
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
