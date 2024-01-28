@@ -2,6 +2,7 @@
 
 import { useSession } from 'next-auth/react'
 import {
+  BellIcon,
   CalendarIcon,
   FilesIcon,
   FolderIcon,
@@ -37,25 +38,16 @@ type AppShellProps = {
 }
 
 export default function AppShell({ children, className, style }: AppShellProps) {
-  const session = useSession()
+  const session = useSession({
+    required: false, // change it true if you don't want to show the app shell to unauthenticated users
+  })
 
   const router = useRouter()
 
   return (
     <div className={cn('flex h-screen', className)} style={style}>
-      {/* <div className="flex items-center space-x-4 border-b px-4 py-2">
-        <div className="flex items-center space-x-2">
-          <div className="rounded-md border bg-muted p-2">
-            <FlameIcon className="h-4 w-4 text-muted-foreground" />
-          </div>
-          <div className="text-sm text-muted-foreground">Next Starter App</div>
-        </div>
-        <div className="flex-1" />
-        <ThemeToggle />
-      </div>
-      <div className="flex-1 overflow-auto">{children}</div> */}
       <div className="flex w-[280px] flex-col overflow-hidden border-r">
-        <div className="flex items-center gap-2 py-4 pl-5 pr-3">
+        <div className="flex items-center gap-3 py-4 pl-5 pr-3">
           <div className="h-6 w-6 rounded-full bg-primary" />
           <div>Next Starter</div>
         </div>
@@ -72,18 +64,22 @@ export default function AppShell({ children, className, style }: AppShellProps) 
         </div>
       </div>
       <div className="relative flex-1">
-        <div className="sticky top-0 flex items-center border-b px-4 py-3">
+        <div className="sticky top-0 flex items-center gap-3 border-b px-4 py-3">
           <div className="flex-1" />
           <div className="flex w-full max-w-screen-sm items-center gap-2 rounded-md p-2 focus-within:ring-1 focus-within:ring-ring">
             <SearchIcon className="h-5 w-5 text-muted-foreground/50" />
             <input
               placeholder="Search for..."
-              className="flex-1 text-sm placeholder:text-muted-foreground/50 focus-visible:outline-none"
+              className="flex-1 bg-transparent text-sm placeholder:text-muted-foreground/50 focus-visible:outline-none"
             />
           </div>
           <div className="flex-1" />
           {session.status === 'authenticated' ? (
-            <AccountMenu />
+            <>
+              <BellIcon className="h-4 w-4 text-muted-foreground" />
+              <div className="h-6 border-r" />
+              <AccountMenu />
+            </>
           ) : session.status === 'unauthenticated' ? (
             <Button
               icon={<UserIcon />}

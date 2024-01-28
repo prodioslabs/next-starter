@@ -56,7 +56,7 @@
 
 @layer base {
   * {
-    @apply border-border ring-ring;
+    @apply border-border ring-ring focus-visible:ring-ring;
   }
   body {
     @apply bg-background text-foreground;

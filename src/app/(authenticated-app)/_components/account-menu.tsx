@@ -1,8 +1,7 @@
 'use client'
 
-import { UserIcon } from 'lucide-react'
+import { ChevronDownIcon, UserIcon } from 'lucide-react'
 import { signOut, useSession } from 'next-auth/react'
-import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,7 +16,11 @@ export default function AccountMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button icon={<UserIcon />} size="icon" variant="outline" />
+        <button className="flex items-center gap-2 rounded-md p-2 text-sm text-muted-foreground focus-visible:outline-none focus-visible:ring-1">
+          <UserIcon className="h-4 w-4" />
+          <span>{session?.user.name}</span>
+          <ChevronDownIcon className="h-4 w-4" />
+        </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem disabled className="flex-col items-start space-y-1">
