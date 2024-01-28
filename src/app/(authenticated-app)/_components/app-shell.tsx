@@ -1,11 +1,22 @@
 'use client'
 
 import { useSession } from 'next-auth/react'
-import { FlameIcon, LoaderIcon, UserIcon } from 'lucide-react'
+import {
+  CalendarIcon,
+  FilesIcon,
+  FolderIcon,
+  HomeIcon,
+  PieChartIcon,
+  SearchIcon,
+  UserIcon,
+  UsersIcon,
+} from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import Spinner from '@/components/ui/spinner'
+import NavLink from './nav-link'
 import AccountMenu from './account-menu'
 
 const ThemeToggle = dynamic(() => import('./theme-toggle'), {
@@ -13,7 +24,7 @@ const ThemeToggle = dynamic(() => import('./theme-toggle'), {
   loading: () => {
     return (
       <div className="flex h-9 w-9 items-center justify-center rounded-md border">
-        <LoaderIcon className="h-4 w-4 animate-spin text-muted-foreground" />
+        <Spinner />
       </div>
     )
   },
@@ -31,8 +42,8 @@ export default function AppShell({ children, className, style }: AppShellProps) 
   const router = useRouter()
 
   return (
-    <div className={cn('flex h-screen flex-col', className)} style={style}>
-      <div className="flex items-center space-x-4 border-b px-4 py-2">
+    <div className={cn('flex h-screen', className)} style={style}>
+      {/* <div className="flex items-center space-x-4 border-b px-4 py-2">
         <div className="flex items-center space-x-2">
           <div className="rounded-md border bg-muted p-2">
             <FlameIcon className="h-4 w-4 text-muted-foreground" />
@@ -41,20 +52,51 @@ export default function AppShell({ children, className, style }: AppShellProps) 
         </div>
         <div className="flex-1" />
         <ThemeToggle />
-        {session.status === 'authenticated' ? (
-          <AccountMenu />
-        ) : session.status === 'unauthenticated' ? (
-          <Button
-            icon={<UserIcon />}
-            onClick={() => {
-              router.push('/api/auth/signin')
-            }}
-          >
-            Login
-          </Button>
-        ) : null}
       </div>
-      <div className="flex-1 overflow-auto">{children}</div>
+      <div className="flex-1 overflow-auto">{children}</div> */}
+      <div className="flex w-[280px] flex-col overflow-hidden border-r">
+        <div className="flex items-center gap-2 py-4 pl-5 pr-3">
+          <div className="h-6 w-6 rounded-full bg-primary" />
+          <div>Next Starter</div>
+        </div>
+        <div className="flex-1 space-y-3 overflow-auto p-3">
+          <NavLink href="/" icon={<HomeIcon />} label="Home" />
+          <NavLink href="/team" icon={<UsersIcon />} label="Team" />
+          <NavLink href="/projects" icon={<FolderIcon />} label="Projects" />
+          <NavLink href="/calendar" icon={<CalendarIcon />} label="Calendar" />
+          <NavLink href="/documents" icon={<FilesIcon />} label="Documents" />
+          <NavLink href="/reports" icon={<PieChartIcon />} label="Reports" />
+        </div>
+        <div className="py-3 pl-5 pr-3">
+          <ThemeToggle />
+        </div>
+      </div>
+      <div className="relative flex-1">
+        <div className="sticky top-0 flex items-center border-b px-4 py-3">
+          <div className="flex-1" />
+          <div className="flex w-full max-w-screen-sm items-center gap-2 rounded-md p-2 focus-within:ring-1 focus-within:ring-ring">
+            <SearchIcon className="h-5 w-5 text-muted-foreground/50" />
+            <input
+              placeholder="Search for..."
+              className="flex-1 text-sm placeholder:text-muted-foreground/50 focus-visible:outline-none"
+            />
+          </div>
+          <div className="flex-1" />
+          {session.status === 'authenticated' ? (
+            <AccountMenu />
+          ) : session.status === 'unauthenticated' ? (
+            <Button
+              icon={<UserIcon />}
+              onClick={() => {
+                router.push('/api/auth/signin')
+              }}
+            >
+              Login
+            </Button>
+          ) : null}
+        </div>
+        {children}
+      </div>
     </div>
   )
 }

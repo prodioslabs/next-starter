@@ -1,10 +1,11 @@
 'use client'
 
-import { FlameIcon, LoaderIcon } from 'lucide-react'
+import { FlameIcon } from 'lucide-react'
 import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { match } from 'ts-pattern'
 import { BaseButton, Button } from '@/components/ui/button'
+import Spinner from '@/components/ui/spinner'
 
 export default function SignoutPage() {
   const session = useSession()
@@ -16,7 +17,7 @@ export default function SignoutPage() {
         .with({ status: 'loading' }, () => {
           return (
             <div className="flex items-center justify-center space-x-2 text-sm">
-              <LoaderIcon className="h-4 w-4 animate-spin text-muted-foreground" />
+              <Spinner />
               <span>Logging out..</span>
             </div>
           )

@@ -3,7 +3,6 @@
 import * as React from 'react'
 import { MoonIcon, SunIcon } from 'lucide-react'
 import { useTheme } from 'next-themes'
-
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 
@@ -20,13 +19,13 @@ export default function ThemeToggle({ className, style }: ThemeToggleProps) {
       <DropdownMenuTrigger asChild>
         <Button
           variant="outline"
-          size="icon"
+          size="icon-sm"
           icon={theme === 'dark' ? <MoonIcon /> : <SunIcon />}
           className={className}
           style={style}
         />
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" side="right">
         <DropdownMenuItem
           onClick={() => {
             setTheme('light')
