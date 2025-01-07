@@ -42,7 +42,7 @@ export function TRPCProvider(
       links: [
         httpBatchLink({
           url: getUrl(),
-          transformer: superjson, // Transformer moved here
+          transformer: superjson,
         }),
       ],
     }),
