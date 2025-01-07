@@ -1,76 +1,28 @@
 'use client'
 
 import * as React from 'react'
-import { MoonIcon, SunIcon } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
+
+import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
-import { cn } from '@/lib/utils'
 
-type ThemeToggleProps = {
-  className?: string
-  style?: React.CSSProperties
-}
-
-export default function ThemeToggle({ className, style }: ThemeToggleProps) {
-  const { setTheme, resolvedTheme } = useTheme()
+export function ThemeToggle() {
+  const { setTheme } = useTheme()
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button
-          className={cn('relative inline-block h-9 w-9 overflow-hidden rounded-md border', className)}
-          style={style}
-        >
-          <AnimatePresence>
-            {resolvedTheme === 'dark' ? (
-              <motion.div
-                key="dark"
-                className="absolute inset-0 flex items-center justify-center"
-                initial={{ y: 20, opacity: 0.02, rotate: -90 }}
-                animate={{ y: 0, opacity: 1, rotate: 0 }}
-                exit={{ y: 20, opacity: 0.02, rotate: 90 }}
-                transition={{ duration: 0.25, ease: 'easeInOut' }}
-              >
-                <MoonIcon className="h-4 w-4" />
-              </motion.div>
-            ) : (
-              <motion.div
-                key="light"
-                className="absolute inset-0 flex items-center justify-center"
-                initial={{ y: 20, opacity: 0.02, rotate: -90 }}
-                animate={{ y: 0, opacity: 1, rotate: 0 }}
-                exit={{ y: 20, opacity: 0.02, rotate: 90 }}
-                transition={{ duration: 0.25, ease: 'easeInOut' }}
-              >
-                <SunIcon className="h-4 w-4" />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </button>
+        <Button variant="outline" size="icon">
+          <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+          <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          <span className="sr-only">Toggle theme</span>
+        </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" side="right">
-        <DropdownMenuItem
-          onClick={() => {
-            setTheme('light')
-          }}
-        >
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => {
-            setTheme('dark')
-          }}
-        >
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => {
-            setTheme('system')
-          }}
-        >
-          System
-        </DropdownMenuItem>
+      <DropdownMenuContent align="center">
+        <DropdownMenuItem onClick={() => setTheme('light')}>Light</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme('dark')}>Dark</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme('system')}>System</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )
