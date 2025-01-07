@@ -7,11 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write --no-error-on-unmatched-pattern \"src/**/*.{ts,tsx,js}\" *.{ts,tsx,js}",
-    "db:generate": "prisma generate",
+    "typecheck": "tsc",
+    "typecheck:watch": "tsc --watch",
+    "format": "prettier --write --ignore-path .gitignore --cache .",
     "db:push": "prisma db push",
     "db:seed": "prisma db seed",
-    "postinstall": "bun run db:generate"
+    "db:generate": "prisma generate"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.7.4",
