@@ -2,7 +2,6 @@
   "name": "next-starter",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "pnpm@8.7.5",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -12,7 +11,7 @@
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
     "db:seed": "prisma db seed",
-    "postinstall": "pnpm run db:generate"
+    "postinstall": "bun run db:generate"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.7.4",
