@@ -3,8 +3,8 @@ import { PrismaAdapter } from '@auth/prisma-adapter'
 import GoogleProvider from 'next-auth/providers/google'
 import GithubProvider from 'next-auth/providers/github'
 import { type Provider } from 'next-auth/providers'
+import { env } from '@/lib/env'
 import { prisma } from './db'
-import { env } from '@/env'
 
 const providers: Provider[] = []
 if (env.GOOGLE_CLIENT_ID && env.GOOGLE_CLIENT_SECRET) {
