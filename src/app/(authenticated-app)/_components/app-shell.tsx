@@ -12,24 +12,12 @@ import {
   UsersIcon,
 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import dynamic from 'next/dynamic'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import Spinner from '@/components/ui/spinner'
 import NavLink from './nav-link'
 import AccountMenu from './account-menu'
 import NotificationsMenu from './nofitications-menu'
-
-const ThemeToggle = dynamic(() => import('./theme-toggle'), {
-  ssr: false,
-  loading: () => {
-    return (
-      <div className="flex h-9 w-9 items-center justify-center rounded-md border">
-        <Spinner />
-      </div>
-    )
-  },
-})
+import { ThemeToggle } from './theme-toggle'
 
 type AppShellProps = {
   children: React.ReactNode

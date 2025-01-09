@@ -14,7 +14,7 @@ export default function Spinner({ className, style }: SpinnerProps) {
       {Array.from({ length: NUM_AXIS }, (_, i) => i).map((i) => (
         <div
           key={i}
-          className="animate-fade absolute left-1/2 top-[20%] h-[30%] w-[10%] origin-bottom transform rounded bg-current"
+          className="absolute left-1/2 top-[20%] h-[30%] w-[10%] origin-bottom transform animate-fade rounded bg-current"
           style={{
             transform: `translateX(-50%) rotate(${i * ANGLE}deg) translateY(-80%)`,
             animationDelay: `${((i * 1) / NUM_AXIS).toFixed(1)}s`,
