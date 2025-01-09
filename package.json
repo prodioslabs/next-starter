@@ -12,8 +12,7 @@
     "typecheck:watch": "tsc --watch",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
-    "db:seed": "prisma db seed",
-    "postinstall": "bun run db:generate"
+    "db:seed": "prisma db seed"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.7.4",
